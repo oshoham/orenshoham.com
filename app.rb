@@ -4,6 +4,6 @@ get '/' do
   erb :index
 end
 
-get '/resume.pdf' do
+get '/resume' do
   send_file('public/pdf/resume.pdf', type: :pdf)
 end

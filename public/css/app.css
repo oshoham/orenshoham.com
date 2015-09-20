@@ -1,8 +1,18 @@
+html, body {
+  height: 100%;
+}
+
 body {
   font-family: 'Open Sans', sans-serif;
 }
 
+.flex-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
 .oren {
-  margin: 0 auto;
   text-align: center;
 }
