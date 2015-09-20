@@ -13,6 +13,10 @@ body {
   height: 100%;
 }
 
-.oren {
+.content {
   text-align: center;
+}
+
+.email {
+  margin-bottom: 20px;
 }
