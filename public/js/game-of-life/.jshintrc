@@ -3,7 +3,7 @@
     "document",
     "window",
     "module",
-    "$",
+    "require",
     "Two"
   ],
   "browser": true,

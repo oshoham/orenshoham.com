@@ -4,16 +4,11 @@ module.exports = function (grunt) {
       dist: {
         options: {
           transform: [
-            ["babelify", {
-              loose: "all"
-            }]
+            ["babelify", { loose: "all" }]
           ]
         },
         files: {
-          // if the source file has an extension of es6 then
-          // we change the name of the source file accordingly.
-          // The result file's extension is always .js
-          "./dist/module.js": ["./modules/index.js"]
+          "./dist/game-of-life.js": ["./modules/index.js"]
         }
       }
     },
