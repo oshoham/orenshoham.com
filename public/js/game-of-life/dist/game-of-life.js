@@ -30,18 +30,50 @@ var GameOfLife = (function () {
     this.width = width;
     this.grid = new _grid2['default'](height, width);
     this.nextGrid = new _grid2['default'](height, width);
+
+    this.grid.set(25, 40, _constants.ALIVE);
+    this.grid.set(24, 40, _constants.ALIVE);
+    this.grid.set(24, 41, _constants.ALIVE);
+    this.grid.set(25, 39, _constants.ALIVE);
+    this.grid.set(26, 40, _constants.ALIVE);
   }
 
-  GameOfLife.prototype.run = function run(numIterations) {};
+  GameOfLife.prototype.run = function run(numIterations) {
+    for (var i = 0; i < numIterations; i++) {
+      this.updateGrid();
+    }
+  };
+
+  GameOfLife.prototype.updateGrid = function updateGrid() {
+    for (var x = 0; x < this.width; x++) {
+      for (var y = 0; y < this.height; y++) {
+        this.updateCell(x, y);
+      }
+    }
+
+    // re-use grid as nextGrid
+    this.swapGrids();
+  };
 
   GameOfLife.prototype.updateCell = function updateCell(x, y) {
     var numberOfLiveNeighbors = this.grid.numberOfLiveNeighbors(x, y);
 
     if (numberOfLiveNeighbors >= 4) {
+      this.nextGrid.set(x, y, _constants.DEAD);
+    } else if (numberOfLiveNeighbors === 3) {
       this.nextGrid.set(x, y, _constants.ALIVE);
-    } else if ([0, 1].indexOf(numberOfLiveNeighbors) !== -1) {
+    } else if (numberOfLiveNeighbors === 2) {
+      var currentValue = this.grid.get(x, y);
+      this.nextGrid.set(x, y, currentValue);
+    } else if (numberOfLiveNeighbors <= 1) {
       this.nextGrid.set(x, y, _constants.DEAD);
     }
+  };
+
+  GameOfLife.prototype.swapGrids = function swapGrids() {
+    var temp = this.grid;
+    this.grid = this.nextGrid;
+    this.nextGrid = temp;
   };
 
   return GameOfLife;
@@ -116,10 +148,8 @@ var Grid = (function () {
         }
 
         // Wrap out of bounds indices to the other side of the grid
-        i = mod(i, this.width);
-        j = mod(j, this.height);
+        var neighborValue = this.get(mod(i, this.width), mod(j, this.height));
 
-        var neighborValue = this.get(i, j);
         if (neighborValue === _constants.ALIVE) {
           liveNeighbors++;
         }
@@ -168,7 +198,10 @@ $(function () {
   // to the screen
   two.update();
 
-  var gameOfLife = new _gameOfLife2['default'](100, 100);
+  var width = 50;
+  var height = 80;
+  var gameOfLife = new _gameOfLife2['default'](height, width);
+  gameOfLife.run(500);
 });
 
 },{"../node_modules/jquery":5,"./game-of-life":2}],5:[function(require,module,exports){

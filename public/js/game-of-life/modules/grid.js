@@ -55,10 +55,8 @@ export default class Grid {
         }
 
         // Wrap out of bounds indices to the other side of the grid
-        i = mod(i, this.width);
-        j = mod(j, this.height);
+        let neighborValue = this.get(mod(i, this.width), mod(j, this.height));
 
-        let neighborValue = this.get(i, j);
         if (neighborValue === ALIVE) {
           liveNeighbors++;
         }

@@ -7,6 +7,12 @@ export default class GameOfLife {
     this.width = width;
     this.grid = new Grid(height, width);
     this.nextGrid = new Grid(height, width);
+
+    this.grid.set(25, 40, ALIVE);
+    this.grid.set(24, 40, ALIVE);
+    this.grid.set(24, 41, ALIVE);
+    this.grid.set(25, 39, ALIVE);
+    this.grid.set(26, 40, ALIVE);
   }
 
   run (numIterations) {

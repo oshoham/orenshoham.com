@@ -24,5 +24,9 @@ $(function () {
   // to the screen
   two.update();
 
-  var gameOfLife = new GameOfLife(100, 100);
+
+  var width = 50;
+  var height = 80;
+  var gameOfLife = new GameOfLife(height, width);
+  gameOfLife.run(500);
 });
