@@ -1,29 +1,42 @@
 import Grid from './grid';
+import Renderer from './renderer';
 import { DEAD, ALIVE } from './constants';
 
 export default class GameOfLife {
-  constructor (height, width) {
-    this.height = height;
-    this.width = width;
-    this.grid = new Grid(height, width);
-    this.nextGrid = new Grid(height, width);
+  constructor ({ gridHeight, gridWidth, windowHeight, windowWidth, elementToRenderTo }) {
+    this.gridHeight = gridHeight;
+    this.gridWidth = gridWidth;
+
+    this.grid = new Grid(gridHeight, gridWidth);
+    this.nextGrid = new Grid(gridHeight, gridWidth);
+
+    this.renderer = new Renderer({
+      gridHeight: gridHeight,
+      gridWidth: gridWidth,
+      windowHeight: windowHeight,
+      windowWidth: windowWidth,
+      elementToRenderTo: elementToRenderTo
+    });
 
     this.grid.set(25, 40, ALIVE);
     this.grid.set(24, 40, ALIVE);
     this.grid.set(24, 41, ALIVE);
     this.grid.set(25, 39, ALIVE);
     this.grid.set(26, 40, ALIVE);
+
+    this.renderer.render(this.grid);
   }
 
-  run (numIterations) {
-    for (let i = 0; i < numIterations; i++) {
+  run () {
+    this.renderer.two.bind('update', () => {
       this.updateGrid();
-    }
+      this.renderer.render(this.grid);
+    }).play();
   }
 
   updateGrid () {
-    for (let x = 0; x < this.width; x++) {
-      for (let y = 0; y < this.height; y++) {
+    for (let x = 0; x < this.gridWidth; x++) {
+      for (let y = 0; y < this.gridHeight; y++) {
         this.updateCell(x, y);
       }
     }

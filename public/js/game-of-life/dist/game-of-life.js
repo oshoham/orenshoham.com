@@ -20,33 +20,57 @@ var _grid = require('./grid');
 
 var _grid2 = _interopRequireDefault(_grid);
 
+var _renderer = require('./renderer');
+
+var _renderer2 = _interopRequireDefault(_renderer);
+
 var _constants = require('./constants');
 
 var GameOfLife = (function () {
-  function GameOfLife(height, width) {
+  function GameOfLife(_ref) {
+    var gridHeight = _ref.gridHeight;
+    var gridWidth = _ref.gridWidth;
+    var windowHeight = _ref.windowHeight;
+    var windowWidth = _ref.windowWidth;
+    var elementToRenderTo = _ref.elementToRenderTo;
+
     _classCallCheck(this, GameOfLife);
 
-    this.height = height;
-    this.width = width;
-    this.grid = new _grid2['default'](height, width);
-    this.nextGrid = new _grid2['default'](height, width);
+    this.gridHeight = gridHeight;
+    this.gridWidth = gridWidth;
+
+    this.grid = new _grid2['default'](gridHeight, gridWidth);
+    this.nextGrid = new _grid2['default'](gridHeight, gridWidth);
+
+    this.renderer = new _renderer2['default']({
+      gridHeight: gridHeight,
+      gridWidth: gridWidth,
+      windowHeight: windowHeight,
+      windowWidth: windowWidth,
+      elementToRenderTo: elementToRenderTo
+    });
 
     this.grid.set(25, 40, _constants.ALIVE);
     this.grid.set(24, 40, _constants.ALIVE);
     this.grid.set(24, 41, _constants.ALIVE);
     this.grid.set(25, 39, _constants.ALIVE);
     this.grid.set(26, 40, _constants.ALIVE);
+
+    this.renderer.render(this.grid);
   }
 
-  GameOfLife.prototype.run = function run(numIterations) {
-    for (var i = 0; i < numIterations; i++) {
-      this.updateGrid();
-    }
+  GameOfLife.prototype.run = function run() {
+    var _this = this;
+
+    this.renderer.two.bind('update', function () {
+      _this.updateGrid();
+      _this.renderer.render(_this.grid);
+    }).play();
   };
 
   GameOfLife.prototype.updateGrid = function updateGrid() {
-    for (var x = 0; x < this.width; x++) {
-      for (var y = 0; y < this.height; y++) {
+    for (var x = 0; x < this.gridWidth; x++) {
+      for (var y = 0; y < this.gridHeight; y++) {
         this.updateCell(x, y);
       }
     }
@@ -82,7 +106,7 @@ var GameOfLife = (function () {
 exports['default'] = GameOfLife;
 module.exports = exports['default'];
 
-},{"./constants":1,"./grid":3}],3:[function(require,module,exports){
+},{"./constants":1,"./grid":3,"./renderer":5}],3:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -178,33 +202,87 @@ var $ = require('../node_modules/jquery');
 
 $(function () {
   var elem = document.getElementById('draw-container');
-  var params = { width: $(window).width(), height: $(window).height() };
-  var two = new Two(params).appendTo(elem);
+  var windowWidth = $(window).width();
+  var windowHeight = $(window).height();
+  var gridWidth = 50;
+  var gridHeight = 80;
 
-  // two has convenience methods to create shapes.
-  var circle = two.makeCircle(72, 100, 50);
-  var rect = two.makeRectangle(213, 100, 100, 100);
+  var gameOfLife = new _gameOfLife2['default']({
+    gridHeight: gridHeight,
+    gridWidth: gridWidth,
+    windowHeight: windowHeight,
+    windowWidth: windowWidth,
+    elementToRenderTo: elem
+  });
 
-  // The object returned has many stylable properties:
-  circle.fill = '#FF8000';
-  circle.stroke = 'orangered'; // Accepts all valid css color
-  circle.linewidth = 5;
-
-  rect.fill = 'rgb(0, 200, 255)';
-  rect.opacity = 0.75;
-  rect.noStroke();
-
-  // Don't forget to tell two to render everything
-  // to the screen
-  two.update();
-
-  var width = 50;
-  var height = 80;
-  var gameOfLife = new _gameOfLife2['default'](height, width);
-  gameOfLife.run(500);
+  gameOfLife.run();
 });
 
-},{"../node_modules/jquery":5,"./game-of-life":2}],5:[function(require,module,exports){
+},{"../node_modules/jquery":6,"./game-of-life":2}],5:[function(require,module,exports){
+'use strict';
+
+exports.__esModule = true;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _constants = require('./constants');
+
+var LIGHT_BLUE = 'rgb(0, 200, 255)';
+var BORDER_COLOR = 'green';
+var ALIVE_COLOR = 'red';
+var DEAD_COLOR = 'black';
+
+var Renderer = (function () {
+  function Renderer(_ref) {
+    var gridHeight = _ref.gridHeight;
+    var gridWidth = _ref.gridWidth;
+    var windowHeight = _ref.windowHeight;
+    var windowWidth = _ref.windowWidth;
+    var elementToRenderTo = _ref.elementToRenderTo;
+
+    _classCallCheck(this, Renderer);
+
+    this.gridHeight = gridHeight;
+    this.gridWidth = gridWidth;
+    this.windowHeight = windowHeight;
+    this.windowWidth = windowWidth;
+    this.elementToRenderTo = elementToRenderTo;
+
+    this.tileHeight = windowHeight / gridHeight;
+    this.tileWidth = windowWidth / gridWidth;
+
+    this.two = new Two({ fullscreen: true }).appendTo(elementToRenderTo);
+
+    var tiles = [];
+    for (var x = 0; x < gridWidth; x++) {
+      tiles[x] = [];
+      for (var y = 0; y < gridHeight; y++) {
+        tiles[x][y] = this.two.makeRectangle(x * this.tileWidth, y * this.tileHeight, this.tileWidth, this.tileHeight);
+      }
+    }
+    this.tiles = tiles;
+  }
+
+  Renderer.prototype.render = function render(grid) {
+
+    for (var x = 0; x < this.gridWidth; x++) {
+      for (var y = 0; y < this.gridHeight; y++) {
+        var rect = this.tiles[x][y];
+        rect.fill = grid.get(x, y) === _constants.ALIVE ? ALIVE_COLOR : DEAD_COLOR;
+        rect.stroke = BORDER_COLOR;
+        rect.linewidth = 1;
+        rect.opacity = 0.75;
+      }
+    }
+  };
+
+  return Renderer;
+})();
+
+exports['default'] = Renderer;
+module.exports = exports['default'];
+
+},{"./constants":1}],6:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
