@@ -1,0 +1,3 @@
+[submodule "public/js/game-of-life"]
+	path = public/js/game-of-life
+	url = git@github.com:oshoham/game-of-life.git
