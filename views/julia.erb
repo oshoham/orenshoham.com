@@ -1,0 +1,139 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>orenshoham.com | julia fractal animation</title>
+
+    <style>
+      body {
+        background-color: #000000;
+        margin: 0px;
+        overflow: hidden;
+      }
+
+      html, body, canvas {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+
+  <canvas id="canvas"></canvas>
+
+  <script src="js/webgl-fractals/node_modules/twgl.js/dist/twgl-full.min.js"></script>
+
+  <script id="vertex-shader" type="x-shader/vertex">
+    attribute vec4 position;
+
+    void main() {
+      gl_Position = position;
+    }
+  </script>
+
+  <script id="fragment-shader" type="x-shader/fragment">
+    #define NUM_STEPS 50.0
+    #define PI 3.1415926535897932384626433832795
+
+    #define cx_mul(a, b) vec2(a.x * b.x - a.y * b.y, a.x * b.y + a.y * b.x)
+
+    precision mediump float;
+    precision mediump int;
+
+    uniform float time;
+    uniform vec2 resolution;
+    uniform sampler2D colorTexture;
+
+    void main() {
+      vec2 currentZ;
+      float steps;
+
+      float a = mod(time, 2.0 * PI);
+      float r = 0.7885;
+      vec2 c = vec2(cos(a) * r, sin(a) * r);
+
+      vec2 prevZ = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
+
+      for (float i = 0.0; i < NUM_STEPS; i++) {
+        steps = i;
+
+        currentZ = cx_mul(prevZ, prevZ) + c;
+
+        if (dot(currentZ, currentZ) > 4.0) {
+          break;
+        }
+
+        prevZ = currentZ;
+      }
+
+      float textureXValue = (steps == NUM_STEPS - 1.0 ? 0.0 : steps) / 100.0;
+      gl_FragColor = texture2D(colorTexture, vec2(textureXValue, 0.0));
+    }
+  </script>
+
+  <script>
+    /**
+     * Provides requestAnimationFrame in a cross browser way.
+     * paulirish.com/2011/requestanimationframe-for-smart-animating/
+     */
+    window.requestAnimationFrame = window.requestAnimationFrame || (function () {
+      return  window.webkitRequestAnimationFrame ||
+              window.mozRequestAnimationFrame ||
+              window.oRequestAnimationFrame ||
+              window.msRequestAnimationFrame ||
+              function (callback) {
+                window.setTimeout( callback, 1000 / 60 );
+              };
+    })();
+
+    var gl = twgl.getWebGLContext(document.getElementById('canvas'));
+    var programInfo = twgl.createProgramInfo(gl, ["vertex-shader", "fragment-shader"]);
+
+    var arrays = {
+      position: {
+        numComponents: 3,
+        data: [
+        // triangle covering lower left half of the screen
+        -1, -1, 0,
+         1, -1, 0,
+        -1, 1, 0,
+        // triangle covering upper right half of screen
+        -1, 1, 0,
+         1, -1, 0,
+         1, 1, 0
+        ]
+      }
+    };
+    var bufferInfo = twgl.createBufferInfoFromArrays(gl, arrays);
+
+    // load the texture outside of the render function so that it's only loaded once
+    var textures = twgl.createTextures(gl, {
+      colorTexture: {
+        src: 'images/fractal-texture.png',
+        mag: gl.NEAREST
+      }
+    });
+
+    function render(time) {
+      twgl.resizeCanvasToDisplaySize(gl.canvas);
+      gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+
+      var uniforms = {
+        time: time * 0.00025,
+        resolution: [gl.canvas.width, gl.canvas.height],
+        colorTexture: textures.colorTexture,
+      };
+
+      gl.useProgram(programInfo.program);
+      twgl.setBuffersAndAttributes(gl, programInfo, bufferInfo);
+      twgl.setUniforms(programInfo, uniforms);
+      twgl.drawBufferInfo(gl, gl.TRIANGLES, bufferInfo);
+
+      window.requestAnimationFrame(render);
+    }
+    window.requestAnimationFrame(render);
+  </script>
+
+  </body>
+</html>

@@ -11,3 +11,7 @@ end
 get '/game-of-life' do
   erb :game_of_life
 end
+
+get '/julia' do
+  erb :julia
+end
