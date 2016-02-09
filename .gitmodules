@@ -1,3 +1,6 @@
 [submodule "public/js/game-of-life"]
 	path = public/js/game-of-life
 	url = git@github.com:oshoham/game-of-life.git
+[submodule "public/projects/soundcloud-visualizer"]
+	path = public/projects/soundcloud-visualizer
+	url = https://github.com/oshoham/soundcloud-visualizer

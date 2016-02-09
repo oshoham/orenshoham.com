@@ -1,7 +1,16 @@
 require 'sinatra'
+require 'tilt/plain'
+
+Tilt.register :html, Tilt[:erb]
+
+helpers do
+  def html(*args)
+    render :html, *args
+  end
+end
 
 get '/' do
-  erb :index
+  html :index
 end
 
 get '/resume' do
@@ -9,9 +18,13 @@ get '/resume' do
 end
 
 get '/game-of-life' do
-  erb :game_of_life
+  html :game_of_life
 end
 
 get '/julia' do
-  erb :julia
+  html :julia
+end
+
+get '/music-visualizer' do
+  html :'../public/projects/soundcloud-visualizer/html/index'
 end
