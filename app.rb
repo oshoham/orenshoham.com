@@ -1,7 +1,22 @@
 require 'sinatra'
+require 'tilt/plain'
+
+Tilt.register :html, Tilt[:erb]
+
+set :views, ['views', 'public/projects']
+
+helpers do
+  def html(*args)
+    render :html, *args
+  end
+
+  def find_template(views, name, engine, &block)
+    views.each { |v| super(v, name, engine, &block) }
+  end
+end
 
 get '/' do
-  erb :index
+  html :index
 end
 
 get '/resume' do
@@ -9,9 +24,13 @@ get '/resume' do
 end
 
 get '/game-of-life' do
-  erb :game_of_life
+  html :game_of_life
 end
 
 get '/julia' do
-  erb :julia
+  html :julia
+end
+
+get '/music-visualizer' do
+  html :'soundcloud-visualizer/html/index'
 end
