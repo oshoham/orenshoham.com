@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'sinatra/contrib'
 require 'tilt/plain'
 
 Tilt.register :html, Tilt[:erb]
@@ -33,4 +34,13 @@ end
 
 get '/music-visualizer' do
   html :'soundcloud-visualizer/html/index'
+end
+
+namespace '/recreating-the-past' do
+  get '/vera-molnar-molndrian' do
+    html :'recreating-the-past/vera-molnar-molndrian'
+  end
+  get '/vera-molnar-molndrian-animated' do
+    html :'recreating-the-past/vera-molnar-molndrian-animated'
+  end
 end
