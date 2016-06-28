@@ -1,0 +1,11 @@
+permalink: /:title
+paginate: 5
+author:
+  name: Oren Shoham
+  url: http://orenshoham.com
+  email: oren.avraham.shoham@gmail.com
+gems: [jekyll-paginate]
+baseurl: /blog
+url: http://localhost:4567 #http://orenshoham.com
+title: SFPC
+tagline: 'A blog/learning log for the summer 2016 class of SFPC'
