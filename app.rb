@@ -20,6 +20,18 @@ get '/' do
   html :index
 end
 
+get '/work' do
+  html :work
+end
+
+get '/sketches' do
+  html :sketches
+end
+
+get '/about' do
+  html :about
+end
+
 get '/resume' do
   send_file('public/pdf/resume.pdf', type: :pdf)
 end

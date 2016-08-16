@@ -3,33 +3,64 @@ html, body {
 }
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans', Helvetica Neue, Arial, Helvetica, sans-serif;
   margin: 0;
 }
 
-.flex-container {
+a {
+  color: #000;
+}
+
+h1 {
+  text-transform: uppercase;
+  font-weight: normal;
+}
+
+.navbar {
+  width: 75%;
+  margin: 0 auto;
+  min-height: 0;
+  border-bottom: 2px solid #999;
+  font-size: 16px;
+  text-transform: uppercase;
+  margin-bottom: 50px;
+}
+
+.navbar__list {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  flex-direction: row;
 
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-
-  height: 100%;
+  margin: 0;
+  padding: 10px 0;
+  justify-content: space-around;
+  list-style: none;
 }
 
-.content {
+.navbar__link {
+  text-decoration: none;
+  color: #999;
+  display: block;
   text-align: center;
 }
 
-.email {
-  margin-bottom: 20px;
+.navbar__link--active {
+  color: #000;
+}
+
+.navbar__link:hover {
+  text-decoration: none;
+  color: #000;
+}
+
+.content {
+  width: 75%;
+  margin: 0 auto;
+}
+
+.contact-info {
+  list-style: none;
+  padding: 0;
 }
