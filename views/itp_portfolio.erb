@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Oren Shoham's ITP Creative Portfolio</title>
+
+    <!-- OpenSans Font -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
+
+    <!-- Custom CSS -->
+    <link href="css/itp-portfolio.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <h1>Oren Shoham's ITP Creative Portfolio</h1>
+
+    <section id="pixel-study">
+      <h2 class="itp-portfolio__section-title">Pixel Study</h2>
+      <p class="itp-portfolio__section-description">
+        <i>Pixel Study</i> is an interactive installation that explores different ways of rendering the pixels of a webcam, drawing inspiration from vector graphics, ASCII art, and mosaics. It is comprised of an openFrameworks app that manipulates webcam video in real time, and a physical interface powered by an Arduino microcontroller that allows the viewer to play with parameters that drive the behavior of the installation. <i>Pixel Study</i> was made as my final project for the 2016 Summer session of the School for Poetic Computation.
+      </p>
+
+      <video class="itp-portfolio__pixel-study-video" src="https://s3.amazonaws.com/itp-portfolio/movies/2016-summer-sfpc-showcase.mp4" controls></video>
+    </section>
+
+    <section id="digital harmony">
+      <h2 class="itp-portfolio__section-title">Scan of John Whitney's Digital Harmony</h2>
+      <p class="itp-portfolio__section-description">
+        John Whitney, Sr. was an early pioneer of computer animation. His book <i>Digital Harmony</i> contains his theories on visual harmony in computer graphics, as well as numerous high-resolution stills from his works and code examples that demonstrate his techniques. Unfortunately, the book is out of print and used copies are expensive. For my own research and in order to make this book widely available, I scanned a copy of the book and ran it through optical character recognition software, using the open-source tools described in this <a href="https://natecraun.net/articles/linux-guide-to-book-scanning.html" target="_blank">guide</a>. The book is now <a href="https://archive.org/details/DigitalHarmony_201611" target="_blank">available for download</a> on the Internet Archive.
+      </p>
+    </section>
+
+    <section id="creative-coding-sketches">
+      <h2 class="itp-portfolio__section-title">Creative Coding Sketches</h2>
+      <p class="itp-portfolio__section-description">
+        These creative coding sketches were made during my time at the School for Poetic Computation in the summer of 2016. Some are experiments with algorithms, computer vision, and abstract geometric forms, while others are responses to existing works of computational art. Some sketches were made with <a href="http://openframeworks.cc/" target="_blank">openFrameworks</a>, others with <a href="http://p5js.org/" target="_blank">p5.js</a>. Because openFrameworks apps are difficult to share on the web, I have created a short video for each sketch. A link to the source code can be found underneath each video.
+      </p>
+
+      <div class="itp-portfolio__sketches">
+      <% for sketch in sketches %>
+        <div class="itp-portfolio__sketch">
+          <video class="itp-portfolio__sketch-video" src="https://s3.amazonaws.com/itp-portfolio/movies/<%= sketch[:file_name] %>.mp4" poster="https://s3.amazonaws.com/itp-portfolio/images/<%= sketch[:file_name] %>.jpg" preload="none" controls loop muted></video>
+          <a class="itp-portfolio__sketch-source-link" href="<%= sketch[:source_url] %>" target="_blank" title="View the source code">
+            <img src="https://s3.amazonaws.com/itp-portfolio/images/GitHub-Mark-120px-plus.png" width="30" height="30">
+          </a>
+          <p class="itp-portfolio__sketch-description"><%= sketch[:description] %></p>
+        </div>
+      <% end %>
+      </div>
+    </section>
+
+  </body>
+</html>

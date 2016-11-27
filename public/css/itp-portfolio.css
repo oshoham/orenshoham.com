@@ -1,0 +1,61 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  text-align: center;
+}
+
+.itp-portfolio__section-title {
+    display: block;
+    margin: 20px 0;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.itp-portfolio__section-description {
+    max-width: 750px;
+    margin: 0 auto 20px;
+    font-size: 16px;
+}
+
+.itp-portfolio__pixel-study-video {
+    width: 100%;
+    max-width: 700px;
+}
+
+.itp-portfolio__sketches {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.itp-portfolio__sketch {
+    padding: 5px;
+}
+
+.itp-portfolio__sketch-video {
+    display: block;
+    width: 400px;
+    height: 400px;
+}
+
+.itp-portfolio__sketch-source-link {
+    float: left;
+    margin-top: 5px;
+}
+
+.itp-portfolio__sketch-description {
+    width: 400px;
+    font-size: 12px;
+    font-style: italic;
+    margin: 12px 0 0;
+}
+
+#creative-coding-sketches {
+    margin-bottom: 150px;
+}
