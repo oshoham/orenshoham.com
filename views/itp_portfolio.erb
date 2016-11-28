@@ -29,6 +29,25 @@
       <video class="itp-portfolio__pixel-study-video" src="https://s3.amazonaws.com/itp-portfolio/movies/2016-summer-sfpc-showcase.mp4" controls></video>
     </section>
 
+    <section id="turbines">
+      <h2 class="itp-portfolio__section-title">Turbines</h2>
+      <p class="itp-portfolio__section-description">
+        A series of animations inspired by the helical motion of <a href="http://youtu.be/Q5COAi6KM8o?t=14s" target="_blank">smoke from a wind turbine on fire</a>. Made with <a href="http://openframeworks.cc/" target="_blank">openFrameworks</a>.
+      </p>
+
+      <div class="itp-portfolio__sketches">
+      <% for sketch in turbine_sketches %>
+        <div class="itp-portfolio__sketch">
+          <video class="itp-portfolio__sketch-video" src="https://s3.amazonaws.com/itp-portfolio/movies/<%= sketch[:file_name] %>.mp4" poster="https://s3.amazonaws.com/itp-portfolio/images/<%= sketch[:file_name] %>.jpg" preload="none" controls loop muted></video>
+          <a class="itp-portfolio__sketch-source-link" href="<%= sketch[:source_url] %>" target="_blank" title="View the source code">
+            <img src="https://s3.amazonaws.com/itp-portfolio/images/GitHub-Mark-120px-plus.png" width="30" height="30">
+          </a>
+          <p class="itp-portfolio__sketch-description"><%= sketch[:description] %></p>
+        </div>
+      <% end %>
+      </div>
+    </section>
+
     <section id="recreating-the-past">
       <h2 class="itp-portfolio__section-title">Recreating the Past</h2>
       <p class="itp-portfolio__section-description">
@@ -56,25 +75,6 @@
 
       <div class="itp-portfolio__sketches">
       <% for sketch in webcam_experiments %>
-        <div class="itp-portfolio__sketch">
-          <video class="itp-portfolio__sketch-video" src="https://s3.amazonaws.com/itp-portfolio/movies/<%= sketch[:file_name] %>.mp4" poster="https://s3.amazonaws.com/itp-portfolio/images/<%= sketch[:file_name] %>.jpg" preload="none" controls loop muted></video>
-          <a class="itp-portfolio__sketch-source-link" href="<%= sketch[:source_url] %>" target="_blank" title="View the source code">
-            <img src="https://s3.amazonaws.com/itp-portfolio/images/GitHub-Mark-120px-plus.png" width="30" height="30">
-          </a>
-          <p class="itp-portfolio__sketch-description"><%= sketch[:description] %></p>
-        </div>
-      <% end %>
-      </div>
-    </section>
-
-    <section id="turbines">
-      <h2 class="itp-portfolio__section-title">Turbines</h2>
-      <p class="itp-portfolio__section-description">
-        A series of animations inspired by the helical motion of <a href="http://youtu.be/Q5COAi6KM8o?t=14s" target="_blank">smoke from a wind turbine on fire</a>. Made with <a href="http://openframeworks.cc/" target="_blank">openFrameworks</a>.
-      </p>
-
-      <div class="itp-portfolio__sketches">
-      <% for sketch in turbine_sketches %>
         <div class="itp-portfolio__sketch">
           <video class="itp-portfolio__sketch-video" src="https://s3.amazonaws.com/itp-portfolio/movies/<%= sketch[:file_name] %>.mp4" poster="https://s3.amazonaws.com/itp-portfolio/images/<%= sketch[:file_name] %>.jpg" preload="none" controls loop muted></video>
           <a class="itp-portfolio__sketch-source-link" href="<%= sketch[:source_url] %>" target="_blank" title="View the source code">
