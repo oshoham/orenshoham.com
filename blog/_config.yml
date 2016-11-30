@@ -6,6 +6,6 @@ author:
   email: oren.avraham.shoham@gmail.com
 gems: [jekyll-paginate]
 baseurl: /blog
-url: http://localhost:4567 #http://orenshoham.com
+url: http://orenshoham.com
 title: SFPC
 tagline: 'A blog/learning log for the summer 2016 class of SFPC'
