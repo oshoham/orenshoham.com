@@ -72,7 +72,7 @@ get '/itp-portfolio' do
     { order: 6, file_name: 'vera_molnar_1', source_url: 'https://github.com/oshoham/sfpc__recreating-the-past/blob/master/week-1/homework/vera-molnar-molndrian-1974-recreation-animated/sketch.js', description: "Animation of Vera Molnar's Molndrian.", type: 'p5' },
     { order: 5, file_name: 'vera_molnar_2', source_url: 'https://github.com/oshoham/sfpc__recreating-the-past/blob/master/week-1/homework/vera-molnar-hommage-a-durer-recreation-animated/sketch.js', description: "Animation of Vera Molnar's Hommage à Dürer.", type: 'p5' },
     { order: 8, file_name: 'whitney_1', source_url: 'https://github.com/oshoham/sfpc__recreating-the-past/blob/master/week-2/homework/whitney/src/ofApp.cpp', description: "Recreation of a scene from John Whitney's film Arabesque.", type: 'openframeworks' },
-    { order: 9, file_name: 'whitney_2', source_url: 'https://github.com/oshoham/sfpc__recreating-the-past/blob/master/week-9/digital-harmony-arabesque/src/ofApp.cpp', description: "Recreation of a scene from John Whitney's film Arabesque", type: 'openframeworks' },
+    { order: 9, file_name: 'whitney_2', source_url: 'https://github.com/oshoham/sfpc__recreating-the-past/blob/master/week-9/digital-harmony-arabesque/src/ofApp.cpp', description: "Recreation of a scene from John Whitney's film Arabesque.", type: 'openframeworks' },
     { order: 7, file_name: 'whitney_3', source_url: 'https://github.com/oshoham/code-sketches/blob/master/whitney-digital-harmony/src/ofApp.cpp', description: "Animation of the cover of John Whitney's book Digital Harmony.", type: 'openframeworks' }
   ].sort_by { |s| s[:order] }.reverse
 
