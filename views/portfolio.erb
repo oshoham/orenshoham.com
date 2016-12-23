@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Oren Shoham's Creative Portfolio</title>
+
+    <!-- OpenSans Font -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
+
+    <!-- Custom CSS -->
+    <link href="css/itp-portfolio.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <h1>Oren Shoham's Creative Portfolio</h1>
+
+    <section id="pixel-study">
+      <h2 class="itp-portfolio__section-title">Pixel Study</h2>
+      <p class="itp-portfolio__section-description">
+        <i>Pixel Study</i> is an interactive installation that explores different ways of rendering the pixels of a webcam, drawing inspiration from vector graphics, ASCII art, and mosaics. It is comprised of an openFrameworks app that manipulates webcam video in real time, and a physical interface powered by an Arduino microcontroller that controls parameters that drive the behavior of the installation. The intent of the interface is to allow the viewer to gain insight into the computational systems that they are interacting with through experimentation and feedback. <i>Pixel Study</i> was made as my final project for the 2016 Summer session of the School for Poetic Computation.
+      </p>
+
+      <video class="itp-portfolio__project-video" src="https://s3.amazonaws.com/itp-portfolio/movies/2016-summer-sfpc-showcase.mp4" controls></video>
+    </section>
+
+    <section id="bike-synth">
+      <h2 class="itp-portfolio__section-title">Bike Wheel Looper</h2>
+      <p class="itp-portfolio__section-description">
+        A looping sample-based instrument made using a bike wheel, mechanical switches, an Arduino running <a href="http://www.arduino.cc/en/Reference/Firmata" target="_blank">Firmata</a>, and an <a href="http://openframeworks.cc/" target="_blank">openFrameworks</a> app. Made for Luisa Pereira's Physical Computing class at the School for Poetic Computation in the summer of 2016. Collaboration with <a href="http://mattvis.co/" target="_blank">Matt Visco</a> and <a href="http://sfpc.io/people/krista-nordgren/" target="_blank">Krista Nordgren</a>.
+      </p>
+
+      <video class="itp-portfolio__project-video" src="https://s3.amazonaws.com/itp-portfolio/movies/bike_synth.mp4" controls></video>
+    </section>
+
+
+    <section id="turbines">
+      <h2 class="itp-portfolio__section-title">Turbines</h2>
+      <p class="itp-portfolio__section-description">
+        A series of animations inspired by the helical motion of <a href="http://youtu.be/Q5COAi6KM8o?t=14s" target="_blank">smoke from a wind turbine on fire</a>. Made with <a href="http://openframeworks.cc/" target="_blank">openFrameworks</a>. Because openFrameworks apps are difficult to share on the web, I have created a short video for each piece. A link to the source code can be found underneath each video.
+      </p>
+
+      <div class="itp-portfolio__sketches">
+      <% for sketch in turbine_sketches %>
+        <div class="itp-portfolio__sketch">
+          <video class="itp-portfolio__sketch-video" src="https://s3.amazonaws.com/itp-portfolio/movies/<%= sketch[:file_name] %>.mp4" poster="https://s3.amazonaws.com/itp-portfolio/images/<%= sketch[:file_name] %>.jpg" preload="none" controls loop muted></video>
+          <a class="itp-portfolio__sketch-source-link" href="<%= sketch[:source_url] %>" target="_blank" title="View the source code">
+            <img src="https://s3.amazonaws.com/itp-portfolio/images/GitHub-Mark-120px-plus.png" width="30" height="30">
+          </a>
+          <p class="itp-portfolio__sketch-description"><%= sketch[:description] %></p>
+        </div>
+      <% end %>
+      </div>
+    </section>
+
+    <section id="recreating-the-past">
+      <h2 class="itp-portfolio__section-title">Recreating the Past</h2>
+      <p class="itp-portfolio__section-description">
+       Creative coding works made for Zach Lieberman's class "Recreating the Past" at the School for Poetic Computation in the summer of 2016. Each piece is a response to an existing work of computational art. Some were made with <a href="http://openframeworks.cc/" target="_blank">openFrameworks</a>, others with <a href="http://p5js.org/" target="_blank">p5.js</a>.
+      </p>
+
+      <div class="itp-portfolio__sketches">
+      <% for sketch in recreating_the_past_sketches %>
+        <div class="itp-portfolio__sketch">
+          <video class="itp-portfolio__sketch-video" src="https://s3.amazonaws.com/itp-portfolio/movies/<%= sketch[:file_name] %>.mp4" poster="https://s3.amazonaws.com/itp-portfolio/images/<%= sketch[:file_name] %>.jpg" preload="none" controls loop muted></video>
+          <a class="itp-portfolio__sketch-source-link" href="<%= sketch[:source_url] %>" target="_blank" title="View the source code">
+            <img src="https://s3.amazonaws.com/itp-portfolio/images/GitHub-Mark-120px-plus.png" width="30" height="30">
+          </a>
+          <p class="itp-portfolio__sketch-description"><%= sketch[:description] %></p>
+        </div>
+      <% end %>
+      </div>
+    </section>
+
+    <section id="webcam-experiments">
+      <h2 class="itp-portfolio__section-title">Webcam Experiments</h2>
+      <p class="itp-portfolio__section-description">
+        Experiments in artistically rendering webcam video, taking inspiration from mosaic tilings, ASCII art, and painting techniques, using algorithms such as optical flow and Voronoi diagrams. Made with <a href="http://openframeworks.cc/" target="_blank">openFrameworks</a>.
+      </p>
+
+      <div class="itp-portfolio__sketches">
+      <% for sketch in webcam_experiments %>
+        <div class="itp-portfolio__sketch">
+          <video class="itp-portfolio__sketch-video" src="https://s3.amazonaws.com/itp-portfolio/movies/<%= sketch[:file_name] %>.mp4" poster="https://s3.amazonaws.com/itp-portfolio/images/<%= sketch[:file_name] %>.jpg" preload="none" controls loop muted></video>
+          <a class="itp-portfolio__sketch-source-link" href="<%= sketch[:source_url] %>" target="_blank" title="View the source code">
+            <img src="https://s3.amazonaws.com/itp-portfolio/images/GitHub-Mark-120px-plus.png" width="30" height="30">
+          </a>
+          <p class="itp-portfolio__sketch-description"><%= sketch[:description] %></p>
+        </div>
+      <% end %>
+      </div>
+    </section>
+
+    <section id="algorithmic-geometric">
+      <h2 class="itp-portfolio__section-title">Algorithmic/Geometric</h2>
+      <p class="itp-portfolio__section-description">
+        Explorations of equations, algorithms, and geometric forms. Some made with <a href="http://openframeworks.cc/" target="_blank">openFrameworks</a>, others with <a href="http://p5js.org/" target="_blank">p5.js</a>.
+      </p>
+
+      <div class="itp-portfolio__sketches">
+      <% for sketch in algorithmic_geometric_sketches %>
+        <div class="itp-portfolio__sketch">
+          <video class="itp-portfolio__sketch-video" src="https://s3.amazonaws.com/itp-portfolio/movies/<%= sketch[:file_name] %>.mp4" poster="https://s3.amazonaws.com/itp-portfolio/images/<%= sketch[:file_name] %>.jpg" preload="none" controls loop muted></video>
+          <a class="itp-portfolio__sketch-source-link" href="<%= sketch[:source_url] %>" target="_blank" title="View the source code">
+            <img src="https://s3.amazonaws.com/itp-portfolio/images/GitHub-Mark-120px-plus.png" width="30" height="30">
+          </a>
+          <p class="itp-portfolio__sketch-description"><%= sketch[:description] %></p>
+        </div>
+      <% end %>
+      </div>
+    </section>
+
+    <section id="digital-harmony">
+      <h2 class="itp-portfolio__section-title">Scan of John Whitney's <i>Digital Harmony</i></h2>
+      <p class="itp-portfolio__section-description">
+        John Whitney, Sr. was an early pioneer of computer animation. His book <i>Digital Harmony</i> contains his theories on visual harmony in computer graphics, as well as numerous high-resolution stills from his works and code examples that demonstrate his techniques. Unfortunately, the book is out of print and used copies are expensive. For my own research and in order to make this book widely available, I scanned a copy of the book and ran it through optical character recognition software, using the open-source tools described in this <a href="https://natecraun.net/articles/linux-guide-to-book-scanning.html" target="_blank">guide</a>. The book is now <a href="https://archive.org/details/DigitalHarmony_201611" target="_blank">available for download</a> on the Internet Archive.
+      </p>
+
+      <iframe src="http://archive.org/stream/DigitalHarmony_201611?ui=embed#mode/2up" width="700" height="627" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen></iframe>
+    </section>
+
+  </body>
+</html>
